@@ -1,7 +1,7 @@
 ---
 
 - name: inventory2librenms playbook
-  hosts: all
+  hosts: localhost
   connection: local
   tasks:
     - name: 'list of all librenms devices'
@@ -23,8 +23,8 @@
         body_format: json
       register: register_inventory2librenms_mew_devices
       when: "item not in inventory2librenms_devices_list"
-      # changed_when: "'error' in register_inventory2librenms_mew_devices.json.status"
-      # failed_when: "'error' in register_inventory2librenms_mew_devices.json.status"
+      changed_when: "'has been added successfully' in register_inventory2librenms_mew_devices.json.status"
+      failed_when: "'error' in register_inventory2librenms_mew_devices.json.status"
       with_inventory_hostnames:
         - all
     - debug: var=register_inventory2librenms_mew_devices
