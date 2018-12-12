@@ -22,7 +22,7 @@
         body: '{{ inventory2librenms_body }}'
         body_format: json
       register: register_inventory2librenms_mew_devices
-      when: "item not in inventory2librenms_devices_list"
+      when: item not in inventory2librenms_devices_list
       changed_when: "'has been added successfully' in register_inventory2librenms_mew_devices.json.status"
       failed_when: "'error' in register_inventory2librenms_mew_devices.json.status"
       with_inventory_hostnames:
