@@ -6,13 +6,13 @@
 
 Ansible Playbook that writes the whole invenotry into Librenms.
 
-## Role Variables
+## Playbook Variables
 
 | Variable             | Default     | Comments (type)                                   |
 | :---                 | :---        | :---                                              |
-| inventory2librenms_url | https://librenms.org | |
-| inventory2librenms_token | | |
-| inventory2librenms_body | | |
+| inventory2librenms_url |  | URL of your Librenms instance |
+| inventory2librenms_token | | API Key of your Librenms instance |
+| inventory2librenms_body | | Contents of the post body see [examples](#Example) for snmp versions.|
 
 ### Example
 

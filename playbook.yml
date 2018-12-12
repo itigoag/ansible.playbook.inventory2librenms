@@ -27,4 +27,3 @@
       # failed_when: "'error' in register_inventory2librenms_mew_devices.json.status"
       with_inventory_hostnames:
         - all
-    - debug: var=register_inventory2librenms_mew_devices
