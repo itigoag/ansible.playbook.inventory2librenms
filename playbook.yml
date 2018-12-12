@@ -1,0 +1,36 @@
+---
+
+- name: inventory2librenms playbook
+  hosts: localhost
+  connection: local
+  vars:
+    inventory2librenms_url: https://librenms.org
+    inventory2librenms_token:
+    inventory2librenms_body:
+      hostname: "{{ item }}"
+      version: "v1"
+      community: "public"
+  tasks:
+    - name: 'list of all librenms devices'
+      uri:
+        url: '{{ inventory2librenms_url }}/api/v0/devices?order=hostname%20DESC'
+        headers:
+          X-Auth-Token: '{{ inventory2librenms_token }}'
+      register: register_inventory2librenms_devices_list
+    - name: 'filter all hostname'
+      set_fact:
+        inventory2librenms_devices_list: "{{ register_inventory2librenms_devices_list | json_query('json.devices[*].hostname') }}"
+    - name: 'add new devices'
+      uri:
+        url: '{{ inventory2librenms_url }}/api/v0/devices'
+        method: POST
+        headers:
+          X-Auth-Token: '{{ inventory2librenms_token }}'
+        body: '{{ inventory2librenms_body }}'
+        body_format: json
+      register: register_inventory2librenms_mew_devices
+      when: "item not in inventory2librenms_devices_list"
+      # changed_when: "'error' in register_inventory2librenms_mew_devices.json.status"
+      # failed_when: "'error' in register_inventory2librenms_mew_devices.json.status"
+      with_inventory_hostnames:
+        - all
