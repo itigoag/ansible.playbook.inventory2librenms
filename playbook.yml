@@ -3,13 +3,6 @@
 - name: inventory2librenms playbook
   hosts: all
   connection: local
-  vars:
-    inventory2librenms_url: https://librenms.org
-    inventory2librenms_token:
-    inventory2librenms_body:
-      hostname: "{{ item }}"
-      version: "v1"
-      community: "public"
   tasks:
     - name: 'list of all librenms devices'
       uri:
