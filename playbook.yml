@@ -1,7 +1,7 @@
 ---
 
 - name: inventory2librenms playbook
-  hosts: localhost
+  hosts: all
   connection: local
   vars:
     inventory2librenms_url: https://librenms.org
