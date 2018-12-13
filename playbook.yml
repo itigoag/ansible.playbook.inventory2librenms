@@ -19,7 +19,7 @@
         method: POST
         headers:
           X-Auth-Token: '{{ inventory2librenms_token }}'
-        body: '{{ inventory2librenms_body }}'
+        body: '{{ hostvars[item].inventory2librenms_body }}'
         body_format: json
       register: register_inventory2librenms_mew_devices
       when: item not in inventory2librenms_devices_list
