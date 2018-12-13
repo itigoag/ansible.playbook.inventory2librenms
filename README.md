@@ -47,6 +47,10 @@ inventory2librenms_body:
   version: "v3"
 ```
 
+### 1.1.0
+
+* fix hostname is lower
+
 ### 1.0.0
 
 * inital role

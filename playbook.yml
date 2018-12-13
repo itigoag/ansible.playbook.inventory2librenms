@@ -35,6 +35,6 @@
           X-Auth-Token: '{{ inventory2librenms_token }}'
       register: register_inventory2librenms_rename_devices
       changed_when: "'Device has been renamed' in register_inventory2librenms_rename_devices.json.status"
-      when: item not in inventory2librenms_devices_list and ( inventory2librenms_hostname_not_lower | default(false) )
+      when: item not in inventory2librenms_devices_list and not ( inventory2librenms_hostname_not_lower | default(false) )
       with_inventory_hostnames:
         - all
